@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import lombok.Data;
 import org.eyeofthewatcher.dungeonmaster.DungeonMaster;
 import org.eyeofthewatcher.dungeonmaster.DungeonMasterJSON;
 import org.eyeofthewatcher.dungeonmaster.entities.Prop;
@@ -30,6 +31,7 @@ import java.util.ResourceBundle;
 /**
  * Created by nmw on 09-06-2017.
  */
+@Data
 public class SpriteController implements Initializable {
 
     @FXML
@@ -44,6 +46,13 @@ public class SpriteController implements Initializable {
 
     @FXML
     private Label selectedID;
+
+    @FXML
+    private TextField textFieldName;
+
+    @FXML
+    private TextArea textAreaDescription;
+
 
     @FXML
     private ImageView selectedSprite;
@@ -74,13 +83,25 @@ public class SpriteController implements Initializable {
     @FXML
     public void btnSaveClicked(MouseEvent event) {
         //Depending on type save in appropiate service
-        if(choiceType.getSelectionModel().getSelectedItem().isInstance(Weapon.class.getClass())){
 
-        }
-        if(choiceType.getSelectionModel().getSelectedItem().isInstance(Tile.class.getClass())){
+        if (Weapon.class.isAssignableFrom(choiceType.getSelectionModel().getSelectedItem())) {
+            Weapon weapon=new Weapon();
+            weapon.setId(Integer.parseInt(getSelectedID().getText()));
+            weapon.setName(textFieldName.getText());
 
+            dungeonMaster.getWeaponRepository().save(weapon);
         }
-        if(choiceType.getSelectionModel().getSelectedItem().isInstance(Prop.class.getClass())){
+        if (Tile.class.isAssignableFrom(choiceType.getSelectionModel().getSelectedItem())) {
+            Tile tile=new Tile();
+            tile.setId(Integer.parseInt(getSelectedID().getText()));
+            tile.setName(textFieldName.getText());
+            dungeonMaster.getTileRepository().save(tile);
+        }
+        if (Prop.class.isAssignableFrom(choiceType.getSelectionModel().getSelectedItem())) {
+            Prop prop=new Prop();
+            prop.setId(Integer.parseInt(getSelectedID().getText()));
+            prop.setName(textFieldName.getText());
+            dungeonMaster.getPropRepository().save(prop);
 
         }
 
@@ -95,6 +116,10 @@ public class SpriteController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         dungeonMaster = new DungeonMasterJSON();
 
+        choiceType.setItems(FXCollections.observableArrayList());
+        choiceType.getItems().add(Weapon.class);
+        choiceType.getItems().add(Tile.class);
+        choiceType.getItems().add(Prop.class);
 
 
         spriteView.setCellFactory(new Callback<TableColumn<Image, Image>, TableCell<Image, Image>>() {

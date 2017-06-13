@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eyeofthewatcher.dungeonmaster.spriteeditor.SpriteController">
     <children>
-        <TableView fx:id="imageTabel" layoutX="-5.0" prefHeight="700.0" prefWidth="224.0">
+        <TableView fx:id="imageTabel" layoutX="-5.0" prefHeight="700.0" prefWidth="224.0" onMouseClicked="#tableViewClickItem">
             <columns>
                 <TableColumn fx:id="spriteView" prefWidth="75.0" text="Sprite" />
                 <TableColumn fx:id="spriteId" prefWidth="75.0" text="Id" />
@@ -23,12 +23,12 @@
       <Label layoutX="228.0" layoutY="124.0" text="Sprite" />
       <ImageView id="spriteView" fx:id="selectedSprite" fitHeight="150.0" fitWidth="200.0" layoutX="337.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
       <Label layoutX="229.0" layoutY="278.0" text="Description" />
-      <TextArea id="textAreaDescription" layoutX="335.0" layoutY="267.0" prefHeight="57.0" prefWidth="200.0" />
+      <TextArea fx:id="textAreaDescription" layoutX="335.0" layoutY="267.0" prefHeight="57.0" prefWidth="200.0" />
       <Label layoutX="229.0" layoutY="216.0" text="Name" />
-      <TextField id="textFieldName" layoutX="335.0" layoutY="221.0" />
-      <ChoiceBox id="choiceType" layoutX="335.0" layoutY="341.0" prefWidth="150.0" />
+      <TextField fx:id="textFieldName" layoutX="335.0" layoutY="221.0" />
+      <ChoiceBox fx:id="choiceType" id="choiceType" layoutX="335.0" layoutY="341.0" prefWidth="150.0" />
       <Label layoutX="231.0" layoutY="333.0" text="Type" />
-      <Button layoutX="687.0" layoutY="661.0" mnemonicParsing="false" text="Save" />
+      <Button layoutX="687.0" layoutY="661.0" mnemonicParsing="false" text="Save"  onMouseClicked="#btnSaveClicked" />
 
     </children>
 

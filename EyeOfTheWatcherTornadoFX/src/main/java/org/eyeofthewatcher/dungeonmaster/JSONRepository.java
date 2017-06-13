@@ -10,6 +10,7 @@ import org.eyeofthewatcher.dungeonmaster.entities.Weapon;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class JSONRepository<T extends JSONAble> implements Repository<T> {
     private List<T> items;
 
     public JSONRepository(Class<T> clazz) {
-        file = new File(clazz.getClass().toString());
+        file = new File(clazz.getName().toString());
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -37,7 +38,7 @@ public class JSONRepository<T extends JSONAble> implements Repository<T> {
             items = mapper.readValue(file, new TypeReference<List<T>>() {
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            items=new ArrayList<>();
         }
     }
 

@@ -12,24 +12,33 @@ import java.util.Random;
 public class DungeonMasterJSON implements DungeonMaster {
 
     private Random random;
+    private JSONRepository<Weapon> weaponJSONRepository;
+    private JSONRepository<Tile> tileJSONRepository;
+    private JSONRepository<Prop> propJSONRepository;
 
     public DungeonMasterJSON() {
         random = new Random();
+        weaponJSONRepository = new JSONRepository<>(Weapon.class);
+        tileJSONRepository = new JSONRepository<>(Tile.class);
+        propJSONRepository = new JSONRepository<>(Prop.class);
     }
 
     @Override
     public JSONRepository<Weapon> getWeaponRepository() {
-        return new JSONRepository<Weapon>(Weapon.class);
+
+        return weaponJSONRepository;
     }
 
     @Override
     public JSONRepository<Tile> getTileRepository() {
-        return new JSONRepository<Tile>(Tile.class);
+
+        return tileJSONRepository;
     }
 
     @Override
     public JSONRepository<Prop> getPropRepository() {
-        return new JSONRepository<Prop>(Prop.class);
+
+        return propJSONRepository;
     }
 
     @Override
